@@ -1,10 +1,12 @@
 import { View, Text ,Alert} from "react-native";
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Input, Button, Image } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
 
-const LoginScreen = ({}) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation=useNavigation()
@@ -12,6 +14,16 @@ const LoginScreen = ({}) => {
   const login=()=>{
     alert('done')
   }
+
+useEffect(()=>{
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      navigation.replace('Home')
+      
+    } 
+  });
+},[])
+
   return (
     <View className="flex-1 items-center justify-center">
       <StatusBar style="light" />
