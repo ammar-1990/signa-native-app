@@ -5,6 +5,8 @@ import { Input, Button, Image } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { KeyboardAvoidingView,Platform } from "react-native";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +14,11 @@ const LoginScreen = () => {
   const navigation=useNavigation()
 
   const login=()=>{
-    alert('done')
+    signInWithEmailAndPassword(auth, email, password)
+    .catch((error) => {
+    alert(error.message)
+    });
+  
   }
 
 useEffect(()=>{
@@ -25,7 +31,7 @@ useEffect(()=>{
 },[])
 
   return (
-    <View className="flex-1 items-center justify-center">
+    <KeyboardAvoidingView  behavior={Platform.OS === 'ios' ? 'padding' : 'height'} className="flex-1 items-center justify-center">
       <StatusBar style="light" />
       <Image
         source={{
@@ -49,12 +55,13 @@ useEffect(()=>{
         secureTextEntry
         value={password}
         onChangeText={(text) => setPassword(text)}
+        onSubmitEditing={login}
       />
       </View>
 
       <Button containerStyle={{width:200,marginTop:10}} title='Login' onPress={login}/>
       <Button onPress={()=>{navigation.navigate('Register')}} containerStyle={{width:200,marginTop:10}} title='Register' type="outline"/>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
