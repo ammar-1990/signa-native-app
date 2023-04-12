@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "signal-native-app",
-    "slug": "signal-native-app",
+    "slug": "signal-clone-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ammarwebmobile.signalcloneapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4db789fa-f68a-4711-bdd3-36fbdb43d0fb"
+      }
     }
   }
 }
